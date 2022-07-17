@@ -23,9 +23,6 @@ cat << EOF > ${DIR_CONFIG}/c0nfig.json
       },
       "streamSettings": {
         "network": "ws"
-		"wsSettings": {
-                "path": "/"
-            }
       }
     }
   ],
