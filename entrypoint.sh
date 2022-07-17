@@ -15,7 +15,7 @@ cat << EOF > ${DIR_CONFIG}/c0nfig.json
         "settings": {
             "clients": [{
                 "id": "c13e10f7-4a4f-4c3b-94f6-a281e26b7a28",
-                "alterId": ${AID}
+                "alterId": 64
             }]
         },
         "streamSettings": {
