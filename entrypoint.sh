@@ -6,31 +6,28 @@ DIR_RUNTIME="/usr/bin"
 DIR_TMP="$(mktemp -d)"
 mkdir -p ${DIR_CONFIG}
 
-# Write V2Ray configuration
+# Write configuration
 cat << EOF > ${DIR_CONFIG}/c0nfig.json
 {
-  "inbounds": [
-    {
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "decryption": "none",
-        "clients": [
-          {
-            "id": "c13e10f7-4a4f-4c3b-94f6-a281e26b7a28"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws"
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "protocol": "freedom"
-    }
-  ]
+    "inbounds": [{
+        "port": ${PORT},
+        "protocol": "vless",
+        "settings": {
+            "clients": [{
+                "id": "c13e10f7-4a4f-4c3b-94f6-a281e26b7a28",
+                "alterId": ${AID}
+            }]
+        },
+        "streamSettings": {
+            "network": "ws",
+            "wsSettings": {
+                "path": "${WSPATH}"
+            }
+        }
+    }],
+    "outbounds": [{
+        "protocol": "freedom"
+    }]
 }
 EOF
 
