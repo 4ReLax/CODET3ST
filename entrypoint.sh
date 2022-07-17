@@ -1,7 +1,13 @@
 #!/bin/sh
 
-# Write Code configuration
-cat << EOF > /etc/Appp/c0nfig.json
+# Global variables
+DIR_CONFIG="/etc/Appp"
+DIR_RUNTIME="/usr/bin"
+DIR_TMP="$(mktemp -d)"
+mkdir -p ${DIR_CONFIG}
+
+# Write V2Ray configuration
+cat << EOF > ${DIR_CONFIG}/c0nfig.json
 {
   "inbounds": [
     {
@@ -31,16 +37,16 @@ cat << EOF > /etc/Appp/c0nfig.json
 }
 EOF
 
-# Get Code executable release
-curl --retry 10 --retry-max-time 60 -H "Cache-Control: no-cache" -fsSL github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip /etc/Appp
-busybox unzip /etc/Appp/Xray-linux-64.zip -d /etc/Appp
+# Get V2Ray executable release
+curl --retry 10 --retry-max-time 60 -H "Cache-Control: no-cache" -fsSL github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip -o ${DIR_TMP}/dist.zip
+busybox unzip ${DIR_TMP}/dist.zip -d ${DIR_TMP}
 
-#Rename
-mv /etc/Appp/xray /etc/Appp/t3st
+mv ${DIR_TMP}/v2ray ${DIR_TMP}/Apppp
 
-# Install App
-install -m 755 /etc/Appp/t3st
-rm -rf /etc/Appp/Xray-linux-64.zip
 
-# Run App
-/etc/Appp/t3st -/etc/Appp/c0nfig.json
+# Install V2Ray
+install -m 755 ${DIR_TMP}/Apppp ${DIR_RUNTIME}
+rm -rf ${DIR_TMP}
+
+# Run V2Ray
+${DIR_RUNTIME}/Apppp -config=${DIR_CONFIG}/c0nfig.json
