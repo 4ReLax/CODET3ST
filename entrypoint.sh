@@ -11,23 +11,18 @@ cat << EOF > ${DIR_CONFIG}/c0nfig.json
 {
   "inbounds": [
     {
-      "listen": "0.0.0.0",
-	  "port": 443,
+      "port": $PORT,
       "protocol": "vless",
       "settings": {
+        "decryption": "none",
         "clients": [
           {
             "id": "c13e10f7-4a4f-4c3b-94f6-a281e26b7a28"
           }
-        ],
-		"decryption": "none"
+        ]
       },
       "streamSettings": {
-        "network": "ws",
-		"security": "none",
-		"wsSettings": {
-                "path": "/"
-        }
+        "network": "ws"
       }
     }
   ],
